@@ -5,6 +5,7 @@
 # include "stdio.h"
 
 # define PRINT_	1
+# define COLORED 1
 
 # if COLORED
 #  define RED_    "\x1b[31m"
@@ -23,5 +24,7 @@
 #  define CYAN_   ""
 #  define RESET_  ""
 # endif
+
+void error(void);
 
 #endif
