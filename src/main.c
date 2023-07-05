@@ -41,3 +41,17 @@ int main(int argc, char *argv[])
 	dup2(p[0], 0);
 	return 0;
 }
+
+/*
+void	ft_putendl_fd(char *color, char *s, int fd)
+{
+	if (!s || fd < 0)
+		return ;
+	while (*color)
+		write(fd, color++, 1);
+	while (*s)
+		write (fd, s++, 1);
+	color = "\x1b[0m";
+	write (fd, "\n", 1);
+}
+*/
