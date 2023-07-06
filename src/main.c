@@ -1,43 +1,39 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#define MSGSIZE 16
+#include <pipex.h>
+
+#define SIZE 16
 char* msg1 = "hello, world #1";
 char* msg2 = "hello, world #2";
 char* msg3 = "hello, world #3";
   
 int main(int argc, char *argv[])
 {
-	char inbuf[MSGSIZE];
-	int p[2], i;
-	int pid;
+	char buff[SIZE];
+	int p[2], i, bytes;
+	pid_t	pid;
 
-	pid = fork();
+	// pid = fork();
 
 	if (pipe(p) < 0)
-		exit(1);
- 
-	/* continued */
-	/* write pipe */
-	
-	write(p[1], msg1, MSGSIZE);
-	write(p[1], msg2, MSGSIZE);
-	write(p[1], msg3, MSGSIZE);
+		error();
 
-	if (pid == 0)
+	if ((pid = fork()) == 0)
 	{
+		close(p[1]);
 		printf("Child pid: %i\n", pid);
+		while ((bytes = read(p[0], buff, SIZE)) > 0)
+			write(1, buff, bytes);
+		close(p[0]);
 	}
 	else
 	{
+		close(p[0]);
+		ft_strlcpy(buff, msg1, SIZE);
+		write(p[1], buff, ft_strlen(buff));
+		close(p[1]);
 		printf("Parent pid: %i\n", pid);
 	}
-	for (i = 0; i < 3; i++) {
-		/* read pipe */
-		read(p[0], inbuf, MSGSIZE);
-		printf("%s\n", inbuf);
-	}
-
-	dup2(p[0], 0);
+	error();
+	waitpid(pid, NULL, 0);
+	//dup2(p[0], 0);
 	return 0;
 }

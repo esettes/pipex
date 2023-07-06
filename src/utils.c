@@ -2,6 +2,6 @@
 
 void error(void)
 {
-	ft_putendl_fd(RED_, "Error", 2);
-	exit(1);
+	ft_putstrc_fd(RED_, strerror(errno), 2);
+	exit(EXIT_FAILURE);
 }
