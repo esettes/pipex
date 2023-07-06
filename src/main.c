@@ -1,39 +1,30 @@
 #include <pipex.h>
 
-#define SIZE 16
-char* msg1 = "hello, world #1";
-char* msg2 = "hello, world #2";
-char* msg3 = "hello, world #3";
-  
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char *envp[])
 {
-	char buff[SIZE];
-	int p[2], i, bytes;
+	int		p[2];
 	pid_t	pid;
-
-	// pid = fork();
+	int		infile;
+	int		outfile;
 
 	if (pipe(p) < 0)
 		error();
-
-	if ((pid = fork()) == 0)
+	pid = fork();
+	if (pid < 0)
+		error();
+	if (pid == 0)
 	{
-		close(p[1]);
-		printf("Child pid: %i\n", pid);
-		while ((bytes = read(p[0], buff, SIZE)) > 0)
-			write(1, buff, bytes);
+		infile = open(argv[1], O_RDONLY);
+		if (infile < 0)
+			error();
 		close(p[0]);
+		// execute
 	}
-	else
-	{
-		close(p[0]);
-		ft_strlcpy(buff, msg1, SIZE);
-		write(p[1], buff, ft_strlen(buff));
-		close(p[1]);
-		printf("Parent pid: %i\n", pid);
-	}
-	error();
 	waitpid(pid, NULL, 0);
-	//dup2(p[0], 0);
+	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (outfile < 0)
+		error();
+	close(p[1]);
+	// execute
 	return 0;
 }
