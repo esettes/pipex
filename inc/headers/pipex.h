@@ -32,6 +32,8 @@
 #  define RESET_  ""
 # endif
 
-void error(void);
+void	error(void);
+void	duplicate_fd(int oldfd, int newfd);
+void	exec_process(char *cmd, char *envp[]);
 
 #endif
