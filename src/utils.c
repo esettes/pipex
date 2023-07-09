@@ -45,7 +45,6 @@ void	exec_process(char *cmd, char *envp[])
 	char	*path;
 
 	cmds = ft_split(cmd, ' ');
-	//path = getenv("PATH");
 	path = get_path(cmds[0], envp);
 	if (!path)
 	{
