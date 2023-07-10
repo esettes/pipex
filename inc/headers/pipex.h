@@ -35,5 +35,7 @@
 void	error(void);
 void	duplicate_fd(int oldfd, int newfd);
 void	exec_process(char *cmd, char *envp[]);
+void	run_child(char *argv[], char *envp[], int *pip);
+void	run_parent(char *argv[], char *envp[], int *pip);
 
 #endif

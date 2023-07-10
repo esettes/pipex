@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-void free_split(char **s)
+void	free_split(char **s)
 {
 	int	i;
 
