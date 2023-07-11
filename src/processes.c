@@ -1,4 +1,16 @@
-#include "pipex.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   processes.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 14:08:41 by iostancu          #+#    #+#             */
+/*   Updated: 2023/07/11 14:08:42 by iostancu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <pipex.h>
 
 void	run_child(char *argv[], char *envp[], int *pip)
 {
@@ -13,7 +25,7 @@ void	run_child(char *argv[], char *envp[], int *pip)
 	exec_process(argv[2], envp);
 }
 
-void	run_parent(char *argv[], char *envp[], int *pip)
+void	run_child2(char *argv[], char *envp[], int *pip)
 {
 	int	outfile;
 

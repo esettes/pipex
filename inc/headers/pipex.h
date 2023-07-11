@@ -1,5 +1,17 @@
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 14:09:44 by iostancu          #+#    #+#             */
+/*   Updated: 2023/07/11 14:09:45 by iostancu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PIPEX_H
+# define PIPEX_H
 
 # include "libft.h"
 # include "stdio.h"
@@ -33,9 +45,15 @@
 # endif
 
 void	error(void);
+/**
+ * @brief Redirects the file descriptor oldfd to newfd.
+ * 
+ * @param oldfd
+ * @param newfd
+ */
 void	duplicate_fd(int oldfd, int newfd);
 void	exec_process(char *cmd, char *envp[]);
 void	run_child(char *argv[], char *envp[], int *pip);
-void	run_parent(char *argv[], char *envp[], int *pip);
+void	run_child2(char *argv[], char *envp[], int *pip);
 
 #endif
