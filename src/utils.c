@@ -6,7 +6,7 @@
 /*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:08:39 by iostancu          #+#    #+#             */
-/*   Updated: 2023/07/11 14:08:40 by iostancu         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:10:21 by iostancu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ void	exec_process(char *cmd, char *envp[])
 	}
 	if (execve(path, cmds, envp) < 0)
 		error();
+}
+
+void	set_next_data_pipe(t_pipe **data)
+{
+	(*data)->cmd = (*data)->cmd2;
+	
 }
 
 void	error(void)

@@ -6,7 +6,7 @@
 /*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:09:44 by iostancu          #+#    #+#             */
-/*   Updated: 2023/07/11 14:09:45 by iostancu         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:02:30 by iostancu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@
 # include "errno.h"
 # include "string.h"
 
-# define PRINT_	1
+typedef struct s_pipe
+{
+	int		pip[2];
+	pid_t	pid;
+	pid_t	pid2;
+	char	*cmd;
+	char	*cmd2;
+}	t_pipe;
+
 # define COLORED 1
 
 # if COLORED
@@ -53,7 +61,9 @@ void	error(void);
  */
 void	duplicate_fd(int oldfd, int newfd);
 void	exec_process(char *cmd, char *envp[]);
-void	run_child(char *argv[], char *envp[], int *pip);
-void	run_child2(char *argv[], char *envp[], int *pip);
+//void	run_child(char *argv[], char *envp[], int *pip);
+void	run_child(t_pipe *data, int infile, char *envp[]);
+//void	run_child2(char *argv[], char *envp[], int *pip);
+void	run_child2(t_pipe *data, int outfile, char *envp[]);
 
 #endif
