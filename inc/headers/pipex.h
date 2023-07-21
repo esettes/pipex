@@ -6,7 +6,7 @@
 /*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:09:44 by iostancu          #+#    #+#             */
-/*   Updated: 2023/07/11 17:27:30 by iostancu         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:18:37 by iostancu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	error(void);
  */
 void	duplicate_fd(int oldfd, int newfd);
 void	exec_process(char *cmd, char *envp[]);
-void	run_child(t_pipe *data, int infile, char *envp[]);
-void	run_child2(t_pipe *data, int outfile, char *envp[]);
+void	run_child(char *argv[], char *envp[], int *pip);
+void	run_child2(char *argv[], char *envp[], int *pip);
+int		cmd_have_path(char *cmd);
+int		cmd_have_current_path(char *cmd);
+char	*get_path(char *cmd, char *envp[]);
+void	free_split(char **s);
 
 #endif

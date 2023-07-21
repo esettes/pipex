@@ -6,7 +6,7 @@
 /*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:08:39 by iostancu          #+#    #+#             */
-/*   Updated: 2023/07/11 16:48:02 by iostancu         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:32:56 by iostancu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,62 +22,9 @@ void	free_split(char **s)
 	free(s);
 }
 
-char	*get_path(char *cmd, char *envp[])
-{
-	char	**paths;
-	char	*path;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		tmp = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(path, F_OK) == 0)
-		{
-			free_split(paths);
-			return (path);
-		}
-		free(path);
-		i++;
-	}
-	free_split(paths);
-	return (NULL);
-}
-
-void	exec_process(char *cmd, char *envp[])
-{
-	char	**cmds;
-	char	*path;
-
-	cmds = ft_split(cmd, ' ');
-	path = get_path(cmds[0], envp);
-	if (!path)
-	{
-		free_split(cmds);
-		printf("path: %s\n", path);
-		error();
-	}
-	
-	if (execve(path, cmds, envp) < 0)
-		error();
-}
-
-void	set_next_data_pipe(t_pipe **data)
-{
-	(*data)->cmd = (*data)->cmd2;
-	
-}
-
 void	error(void)
 {
-	ft_putstrc_fd(RED_, strerror(errno), 2);
+	ft_putendl_fd(RED_, strerror(errno), 2);
 	exit(EXIT_FAILURE);
 }
 

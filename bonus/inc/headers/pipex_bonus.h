@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iostancu <iostancu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:09:44 by iostancu          #+#    #+#             */
-/*   Updated: 2023/07/11 17:27:30 by iostancu         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:26:43 by iostancu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include "libft.h"
 # include "stdio.h"
@@ -63,5 +63,9 @@ void	duplicate_fd(int oldfd, int newfd);
 void	exec_process(char *cmd, char *envp[]);
 void	run_child(t_pipe *data, int infile, char *envp[]);
 void	run_child2(t_pipe *data, int outfile, char *envp[]);
+int		cmd_have_path(char *cmd);
+int		cmd_have_current_path(char *cmd);
+char	*get_path(char *cmd, char *envp[]);
+void	free_split(char **s);
 
 #endif
